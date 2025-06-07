@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@intlayer/*": ["./packages/*/src"],
+      "@intlayer/core": ["./packages/core/src"],
+      "@intlayer/config": ["./packages/config/src"],
+      "@intlayer/editor-react": ["./packages/editor-react/src"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

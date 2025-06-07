@@ -1,8 +1,36 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@utils/ts-config",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node", "vite/client"],
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@intlayer/*": ["../*"],
+      "@intlayer/core": ["../core/src"],
+      "@intlayer/config": ["../config/src"],
+      "@intlayer/editor-react": ["../editor-react/src"]
+    },
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "skipLibCheck": false,
+    "noEmit": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["**/*"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts"
+  ],
+  "files": ["vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
