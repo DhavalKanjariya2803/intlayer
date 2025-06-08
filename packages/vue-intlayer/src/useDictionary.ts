@@ -1,5 +1,6 @@
+import type { LocalesValues } from '@intlayer/config';
+import { Locales } from '@intlayer/config';
 import configuration from '@intlayer/config/built';
-import type { LocalesValues } from '@intlayer/config/client';
 import type { Dictionary } from '@intlayer/core';
 import { computed, inject } from 'vue';
 import { getDictionary } from './getDictionary';
@@ -17,13 +18,15 @@ export const useDictionary = <T extends Dictionary>(
   locale?: LocalesValues
 ) => {
   const context = inject(IntlayerClientKey, {
-    locale: configuration?.internationalization?.defaultLocale || 'en',
+    locale:
+      configuration?.internationalization?.defaultLocale || Locales.ENGLISH, // or any other valid locale from the Locales enum
     setLocale: () => {},
     disableEditor: false,
   });
 
-  const currentLocale = context.locale;
-  const localeTarget = locale ?? currentLocale;
+  const currentLocale = context.locale as LocalesValues;
+  const localeTarget: LocalesValues = (locale ??
+    currentLocale) as LocalesValues;
 
   return computed(() =>
     getDictionary<T, LocalesValues>(dictionary, localeTarget)

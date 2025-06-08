@@ -13,17 +13,17 @@ export const renderVueElement = (vnode: VNode): VNode => {
 
   // Handle component with children
   if (vnode.children) {
-    const children = Array.isArray(vnode.children)
-      ? vnode.children.map((child) =>
-          typeof child === 'object' && child !== null && 'type' in child
-            ? renderVueElement(child as VNode)
-            : child
-        )
-      : typeof vnode.children === 'object' &&
-          vnode.children !== null &&
-          'type' in vnode.children
-        ? renderVueElement(vnode.children as VNode)
-        : vnode.children;
+    let children: any = vnode.children;
+
+    if (Array.isArray(children)) {
+      children = children.map((child) =>
+        typeof child === 'object' && child !== null && 'type' in child
+          ? renderVueElement(child as VNode)
+          : child
+      );
+    } else if (children && typeof children === 'object' && 'type' in children) {
+      children = renderVueElement(children as VNode);
+    }
 
     return h(vnode.type as any, vnode.props || {}, children);
   }

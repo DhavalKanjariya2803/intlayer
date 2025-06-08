@@ -1,12 +1,13 @@
-import type { LocalesValues, Plugins } from '@intlayer/core';
-import type { IntlayerDictionaryTypesConnector } from '@intlayer/core/types/dictionary';
+import type { LocalesValues } from '@intlayer/config/client';
+import type { Plugins } from '@intlayer/core';
+// @ts-ignore intlayer declared for module augmentation
+import type { IntlayerDictionaryTypesConnector } from 'intlayer';
 import {
   type DeepTransformContent,
   intlayerNodePlugins,
   markdownPlugin,
   vueNodePlugins,
 } from './plugins';
-
 // Extract DictionaryKeys from IntlayerDictionaryTypesConnector
 type DictionaryKeys = keyof IntlayerDictionaryTypesConnector extends never
   ? string
